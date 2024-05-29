@@ -37,9 +37,9 @@ The Tiniest Renaming Tool, also known as Renameador, helps you batch rename file
 
 You can use Renameador without cloning the repository by downloading the executable for your operating system:
 
-- [Download for Windows](https://github.com/PabloGomezBr/renameador/releases/download/v1.0.0/renameador-windows.exe)
-- [Download for Linux](https://github.com/PabloGomezBr/renameador/releases/download/v1.0.0/renameador-linux)
-- [Download for macOS](https://github.com/PabloGomezBr/renameador/releases/download/v1.0.0/renameador-macos)
+- [Download for Windows](Renameador/renameador-win.exe)
+- [Download for Linux](Renameador/renameador-linux)
+- [Download for macOS](Renameador/renameador-macos)
 
 
 Make sure to give the executable the necessary permissions and run it from your terminal.
