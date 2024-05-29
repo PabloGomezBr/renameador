@@ -1,0 +1,14 @@
+{
+  "name": "renameador",
+  "version": "1.0.0",
+  "description": "A simple yet powerful tool for renaming your files and directories with ease",
+  "main": "Renameador.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pablo Gómez Bravo",
+  "license": "ISC",
+  "dependencies": {
+    "figlet": "^1.7.0"
+  }
+}
