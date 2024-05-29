@@ -3,12 +3,24 @@
   "version": "1.0.0",
   "description": "A simple yet powerful tool for renaming your files and directories with ease",
   "main": "Renameador.js",
+  "bin": {
+    "renameador": "./Renameador.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pablo Gómez Bravo",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "figlet": "^1.7.0"
+  },
+  "pkg": {
+    "assets": ["node_modules/figlet/fonts/Big.flf"],
+    "targets": [
+      "node16-win-x64",
+      "node16-macos-x64",
+      "node16-linux-x64"
+    ],
+    "outputPath": "Renameador"
   }
 }
