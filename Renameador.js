@@ -41,20 +41,28 @@ class Conflicts {
  * @returns {Object} - An object containing the filtered arrays of files and directories to rename.
  */
 async function getItemsToRename(rlInterface, exceptions) {
+
     // Scan the files filtering the current program and the exceptions the user added
     const entries = fs
     .readdirSync('./')
-    // TODO: Uncomment/comment only for dev purposes or if youre executing from node
-    // .filter((entry) => entry !== path.basename(__filename) && !exceptions.includes(entry));
-    .filter((entry) => entry !== path.basename(__filename) &&
-        !exceptions.includes(entry) &&
-        entry !== path.basename('node_modules') &&
-        entry !== path.basename('package-lock.json') &&
-        entry !== path.basename('package.json') &&
-        entry !== path.basename('.git') &&
-        entry !== path.basename('LICENSE') &&
-        entry !== path.basename('README.md') &&
-        entry !== path.basename('.gitignore'));
+    .filter((entry) => {
+        // TODO: Modify the exclusions only for dev purposes or if you are executing from node
+        const isExcluded = [
+            path.basename(__filename),
+            path.basename('node_modules'),
+            path.basename('package-lock.json'),
+            path.basename('package.json'),
+            path.basename('.git'),
+            path.basename('LICENSE'),
+            path.basename('README.md'),
+            path.basename('.gitignore')
+        ];
+        if (process.argv[0] !== undefined) {
+            isExcluded.push(path.basename(process.argv[0]));
+        }
+        return !isExcluded.includes(entry) && !exceptions.includes(entry);
+    });
+
     let files = [];
     let directories = [];
 
@@ -151,7 +159,7 @@ function renamingPreview(charsToDelete, files, directories, isFromEnd, isDirsInc
  * @param {number} charsToDelete - Number of characters to delete.
  * @param {boolean} isFromEnd - Flag indicating if characters should be removed from the end.
  */
-async function renameFiles(rlInterface, charsToDelete, isFromEnd) {
+async function renameFiles(rlInterface, files, directories, charsToDelete, isFromEnd, isDirsIncluded) {
     try {
         // Check for conflicts
         const conflictItemsArr = [];
@@ -378,6 +386,7 @@ async function main () {
 
         // getItemsToRename is returning the files and directories already filtered (directories will be empty if user didnt want to include them)
         const {files, directories} = await getItemsToRename(rlInterface, exceptions);
+        const isDirsIncluded = directories.length > 0;
 
         // If there is no files to rename, abort
         if (files.length <= 0 && directories.length <= 0) {
@@ -424,7 +433,7 @@ async function main () {
         }
         
         renamingPreview(charsToDelete, files, directories, isFromEnd, isDirsIncluded, 10);
-        await renameFiles(rlInterface, charsToDelete, isFromEnd, exceptions);
+        await renameFiles(rlInterface, files, directories, charsToDelete, isFromEnd, isDirsIncluded);
     } catch (error) {
         console.error('\n\n\x1b[31m\u{1F480}  An error occurred:\x1b[0m', error);
         console.error('\n\x1b[31m\u{1F480}  Error message:\x1b[0m', error.message);
@@ -450,10 +459,12 @@ async function main () {
             console.log('Error:', err);
             return;
         }
-        console.log(`\n\x1b[34m${data}\x1b[0m`);
+        console.log(`\n\n\n\x1b[34m${data}\x1b[0m`);
         console.log('\x1b[34m\t\t\u{1f310}   https://github.com/PabloGomezBr/renameador   \u{1f310}\x1b[0m\n\n')
-        // Newbie programer hacks, do not judge please :D
-        Promise.all();
-        process.exit();
+        
+        console.log("\n\n\n\nPress any key to exit...");
+        process.stdin.setRawMode(true);
+        process.stdin.resume();
+        process.stdin.on('data', process.exit.bind(process, 0));
     });
 })();
