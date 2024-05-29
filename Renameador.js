@@ -44,9 +44,17 @@ async function getItemsToRename(rlInterface, exceptions) {
     // Scan the files filtering the current program and the exceptions the user added
     const entries = fs
     .readdirSync('./')
-    // TODO: Uncomment/comment only for dev purposes
-    .filter((entry) => entry !== path.basename(__filename) && !exceptions.includes(entry));
-    // .filter((entry) => entry !== path.basename(__filename) && !exceptions.includes(entry) && entry !== path.basename('node_modules') && entry !== path.basename('package-lock.json') && entry !== path.basename('package.json'));
+    // TODO: Uncomment/comment only for dev purposes or if youre executing from node
+    // .filter((entry) => entry !== path.basename(__filename) && !exceptions.includes(entry));
+    .filter((entry) => entry !== path.basename(__filename) &&
+        !exceptions.includes(entry) &&
+        entry !== path.basename('node_modules') &&
+        entry !== path.basename('package-lock.json') &&
+        entry !== path.basename('package.json') &&
+        entry !== path.basename('.git') &&
+        entry !== path.basename('LICENSE') &&
+        entry !== path.basename('README.md') &&
+        entry !== path.basename('.gitignore'));
     let files = [];
     let directories = [];
 
