@@ -1,6 +1,7 @@
-# 🛠️ Tiniest Renaming Tool - Renameador
+# 🛠️ Renameador - The easiest tool to rename a bunch of files
 
-Welcome to the Tiniest Renaming Tool, a simple yet powerful tool for renaming your files and directories with ease! 🚀
+Welcome Renameador, the tiniest renaming tool, a simple yet powerful tool for renaming your files and directories with ease! 🚀
+Renameador helps you batch rename files and directories efficiently. Whether you're looking to remove characters from the start or end of filenames, Renameador has got you covered.
 
 <!-- ![Renameador Logo](path/to/logo.png) Add your logo image here -->
 
@@ -18,7 +19,9 @@ Welcome to the Tiniest Renaming Tool, a simple yet powerful tool for renaming yo
 
 ## 📖 About
 
-The Tiniest Renaming Tool, also known as Renameador, helps you batch rename files and directories efficiently. Whether you're looking to remove characters from the start or end of filenames, Renameador has got you covered.
+It works in the same directory where it's being executed. Renameador is designed for you to be able to remove 'x' number of characters from all the files you have in the directory where the program is executed. Its operation is very simple and transparent, so don't hesitate to try it out!
+
+The prompts will guide you through the entire process so you can control and see at all times what will happen to your files!"
 
 ---
 
